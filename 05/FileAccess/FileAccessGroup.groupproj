@@ -1,0 +1,49 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{9fc0349f-f812-4464-8146-522a4bf8f243}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup />
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="FileAccessThemed">
+    <MSBuild Projects="FileAccessThemed.dproj" Targets="" />
+  </Target>
+  <Target Name="FileAccessThemed:Clean">
+    <MSBuild Projects="FileAccessThemed.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="FileAccessThemed:Make">
+    <MSBuild Projects="FileAccessThemed.dproj" Targets="Make" />
+  </Target>
+  <Target Name="FileAccessCopy">
+    <MSBuild Projects="FileAccessCopy.dproj" Targets="" />
+  </Target>
+  <Target Name="FileAccessCopy:Clean">
+    <MSBuild Projects="FileAccessCopy.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="FileAccessCopy:Make">
+    <MSBuild Projects="FileAccessCopy.dproj" Targets="Make" />
+  </Target>
+  <Target Name="FileAccess">
+    <MSBuild Projects="FileAccess.dproj" Targets="" />
+  </Target>
+  <Target Name="FileAccess:Clean">
+    <MSBuild Projects="FileAccess.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="FileAccess:Make">
+    <MSBuild Projects="FileAccess.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="FileAccessThemed;FileAccessCopy;FileAccess" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="FileAccessThemed:Clean;FileAccessCopy:Clean;FileAccess:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="FileAccessThemed:Make;FileAccessCopy:Make;FileAccess:Make" />
+  </Target>
+</Project>

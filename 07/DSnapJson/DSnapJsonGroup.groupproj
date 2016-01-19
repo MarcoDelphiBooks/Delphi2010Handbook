@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{17BA8DE0-190D-4AF5-8AFA-1F4791287D8F}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="DSnapJsonServer.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="DSnapJsonClient.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="DSnapJsonServer">
+			<MSBuild Projects="DSnapJsonServer.dproj"/>
+		</Target>
+		<Target Name="DSnapJsonServer:Clean">
+			<MSBuild Targets="Clean" Projects="DSnapJsonServer.dproj"/>
+		</Target>
+		<Target Name="DSnapJsonServer:Make">
+			<MSBuild Targets="Make" Projects="DSnapJsonServer.dproj"/>
+		</Target>
+		<Target Name="DSnapJsonClient">
+			<MSBuild Projects="DSnapJsonClient.dproj"/>
+		</Target>
+		<Target Name="DSnapJsonClient:Clean">
+			<MSBuild Targets="Clean" Projects="DSnapJsonClient.dproj"/>
+		</Target>
+		<Target Name="DSnapJsonClient:Make">
+			<MSBuild Targets="Make" Projects="DSnapJsonClient.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="DSnapJsonServer;DSnapJsonClient"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="DSnapJsonServer:Clean;DSnapJsonClient:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="DSnapJsonServer:Make;DSnapJsonClient:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

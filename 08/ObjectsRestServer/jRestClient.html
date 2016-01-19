@@ -1,0 +1,110 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>jQuery and Delphi 2010 REST</title>
+<script src="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js" type="text/javascript"></script>
+<script src="http://jquery-json.googlecode.com/files/jquery.json-2.2.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+var baseUrl = "/ObjectsRestServer.RestObjects/dataSnap/rest/TObjectsRest/";
+
+function refreshList()
+{
+	$.getJSON(baseUrl + "list",
+	  function(data) {
+		thearray = data.result[0];
+		var ratingMarkup = ["<br>"];
+		for (var i=0; i < thearray.length; i++) {
+		  ratingMarkup = ratingMarkup +  "<a href='#'>" + thearray[i] + "</a><br>";
+		}
+		// add markup to container
+		$("#list").html(ratingMarkup);
+		$("#list").find("a").click(function(e) {
+		  var wasclicked = $(this);
+		  $.getJSON(baseUrl + "MyData/" + $(this).html(),
+			function(data) {
+			  strResult = data.result[0].Value;
+			  $("#inputName").val(wasclicked.html());
+			  $("#inputValue").val(strResult);
+			} );
+		  });
+	  } );
+};
+
+$(document).ready(function() {
+
+	$.getJSON(baseUrl + "MyData/Sample",
+	  function(data) {
+		strResult = data.result[0].Value;
+		$("#sample").html(strResult);
+	  } );
+
+	refreshList();
+
+	$("#refresh").click(function(e) {
+	  refreshList();
+	} );
+
+	$("#buttonUpdate").click(function(e) {
+		$.ajax({
+			type: "POST",
+			url: baseUrl + "MyData/" +
+			  $("#inputName").val() + "/" + $("#inputValue").val(),
+			success: function(msg){
+				$("#log").html(msg);
+			}
+		});
+	});
+
+	$("#buttonDelete").click(function(e) {
+		$.ajax({
+			type: "DELETE",
+			url: baseUrl + "MyData/" + $("#inputName").val(),
+			success: function(msg){
+				$("#log").html(msg);
+			}
+		});
+	});
+
+	$("#buttonNew").click(function(e) {
+		$.ajax({
+			type: 'PUT',
+			data: $("#inputValue").val(),
+			url: baseUrl + "MyData/" + $("#inputName").val(),
+			success: function(msg){
+				$("#log").html(msg);
+			}
+		});
+	});
+
+});
+</script>
+</head>
+<body>
+<h1>jQuery and Delphi 2010 REST</h1>
+
+<p>This example demonstrates the use of jQuery for reading and modifying objects in a list.</p>
+
+<div>Sample: <span id="sample"></span></div>
+<br><br>
+
+<div>Current entries list:
+  <a href="#" id="refresh">Refresh</a>
+  <span id="list"></span></div>
+
+<p>Current Element:
+<br/>
+<input type="text" id="inputName" size="50" value="">
+<br/>
+<input type="text" id="inputValue" size="50" value="">
+
+<br/>
+<input type="button" value="Update" id="buttonUpdate">
+<input type="button" value="Delete" id="buttonDelete">
+<input type="button" value="New" id="buttonNew">
+
+<div id="log">Log info goes here: </div>
+
+
+</body>
+</html>

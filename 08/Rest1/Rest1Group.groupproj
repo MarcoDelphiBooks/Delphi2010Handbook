@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{2A5F13F4-5ED1-4B3A-9325-3355597418B6}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="Rest1.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="Rest1Client.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="Rest1">
+			<MSBuild Projects="Rest1.dproj"/>
+		</Target>
+		<Target Name="Rest1:Clean">
+			<MSBuild Targets="Clean" Projects="Rest1.dproj"/>
+		</Target>
+		<Target Name="Rest1:Make">
+			<MSBuild Targets="Make" Projects="Rest1.dproj"/>
+		</Target>
+		<Target Name="Rest1Client">
+			<MSBuild Projects="Rest1Client.dproj"/>
+		</Target>
+		<Target Name="Rest1Client:Clean">
+			<MSBuild Targets="Clean" Projects="Rest1Client.dproj"/>
+		</Target>
+		<Target Name="Rest1Client:Make">
+			<MSBuild Targets="Make" Projects="Rest1Client.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="Rest1;Rest1Client"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="Rest1:Clean;Rest1Client:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="Rest1:Make;Rest1Client:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

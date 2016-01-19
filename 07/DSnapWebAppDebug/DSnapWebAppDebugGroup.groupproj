@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{DBE05C0C-F2FA-47F9-AD96-CE6DE752D2FB}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="DSnapWebAppDebug.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="DSnapWadClient.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="DSnapWebAppDebug">
+			<MSBuild Projects="DSnapWebAppDebug.dproj"/>
+		</Target>
+		<Target Name="DSnapWebAppDebug:Clean">
+			<MSBuild Targets="Clean" Projects="DSnapWebAppDebug.dproj"/>
+		</Target>
+		<Target Name="DSnapWebAppDebug:Make">
+			<MSBuild Targets="Make" Projects="DSnapWebAppDebug.dproj"/>
+		</Target>
+		<Target Name="DSnapWadClient">
+			<MSBuild Projects="DSnapWadClient.dproj"/>
+		</Target>
+		<Target Name="DSnapWadClient:Clean">
+			<MSBuild Targets="Clean" Projects="DSnapWadClient.dproj"/>
+		</Target>
+		<Target Name="DSnapWadClient:Make">
+			<MSBuild Targets="Make" Projects="DSnapWadClient.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="DSnapWebAppDebug;DSnapWadClient"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="DSnapWebAppDebug:Clean;DSnapWadClient:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="DSnapWebAppDebug:Make;DSnapWadClient:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

@@ -1,0 +1,60 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{E1BFB72F-4B81-4798-9F0A-7B0AE3F70A68}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="DSnapGateway.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="C:\Users\Marco\Documents\RAD Studio\Projects\DSnapGateClient.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="DSnapServer.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="DSnapGateway">
+			<MSBuild Projects="DSnapGateway.dproj"/>
+		</Target>
+		<Target Name="DSnapGateway:Clean">
+			<MSBuild Targets="Clean" Projects="DSnapGateway.dproj"/>
+		</Target>
+		<Target Name="DSnapGateway:Make">
+			<MSBuild Targets="Make" Projects="DSnapGateway.dproj"/>
+		</Target>
+		<Target Name="DSnapGateClient">
+			<MSBuild Projects="C:\Users\Marco\Documents\RAD Studio\Projects\DSnapGateClient.dproj"/>
+		</Target>
+		<Target Name="DSnapGateClient:Clean">
+			<MSBuild Targets="Clean" Projects="C:\Users\Marco\Documents\RAD Studio\Projects\DSnapGateClient.dproj"/>
+		</Target>
+		<Target Name="DSnapGateClient:Make">
+			<MSBuild Targets="Make" Projects="C:\Users\Marco\Documents\RAD Studio\Projects\DSnapGateClient.dproj"/>
+		</Target>
+		<Target Name="DSnapServer">
+			<MSBuild Projects="DSnapServer.dproj"/>
+		</Target>
+		<Target Name="DSnapServer:Clean">
+			<MSBuild Targets="Clean" Projects="DSnapServer.dproj"/>
+		</Target>
+		<Target Name="DSnapServer:Make">
+			<MSBuild Targets="Make" Projects="DSnapServer.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="DSnapGateway;DSnapGateClient;DSnapServer"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="DSnapGateway:Clean;DSnapGateClient:Clean;DSnapServer:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="DSnapGateway:Make;DSnapGateClient:Make;DSnapServer:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

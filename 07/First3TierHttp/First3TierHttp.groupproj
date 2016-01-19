@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{763B6A26-5DD9-474E-B685-78538C7D3B30}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="First3TierHttp_Server.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="First3TierHttp_Client.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="First3TierHttp_Server">
+			<MSBuild Projects="First3TierHttp_Server.dproj"/>
+		</Target>
+		<Target Name="First3TierHttp_Server:Clean">
+			<MSBuild Targets="Clean" Projects="First3TierHttp_Server.dproj"/>
+		</Target>
+		<Target Name="First3TierHttp_Server:Make">
+			<MSBuild Targets="Make" Projects="First3TierHttp_Server.dproj"/>
+		</Target>
+		<Target Name="First3TierHttp_Client">
+			<MSBuild Projects="First3TierHttp_Client.dproj"/>
+		</Target>
+		<Target Name="First3TierHttp_Client:Clean">
+			<MSBuild Targets="Clean" Projects="First3TierHttp_Client.dproj"/>
+		</Target>
+		<Target Name="First3TierHttp_Client:Make">
+			<MSBuild Targets="Make" Projects="First3TierHttp_Client.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="First3TierHttp_Server;First3TierHttp_Client"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="First3TierHttp_Server:Clean;First3TierHttp_Client:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="First3TierHttp_Server:Make;First3TierHttp_Client:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

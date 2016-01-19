@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{2D171D59-3BBC-43E0-BFDF-3BAA0CD56750}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="DSnapHttpConsole.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="ConsoleClient.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="DSnapHttpConsole">
+			<MSBuild Projects="DSnapHttpConsole.dproj"/>
+		</Target>
+		<Target Name="DSnapHttpConsole:Clean">
+			<MSBuild Targets="Clean" Projects="DSnapHttpConsole.dproj"/>
+		</Target>
+		<Target Name="DSnapHttpConsole:Make">
+			<MSBuild Targets="Make" Projects="DSnapHttpConsole.dproj"/>
+		</Target>
+		<Target Name="ConsoleClient">
+			<MSBuild Projects="ConsoleClient.dproj"/>
+		</Target>
+		<Target Name="ConsoleClient:Clean">
+			<MSBuild Targets="Clean" Projects="ConsoleClient.dproj"/>
+		</Target>
+		<Target Name="ConsoleClient:Make">
+			<MSBuild Targets="Make" Projects="ConsoleClient.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="DSnapHttpConsole;ConsoleClient"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="DSnapHttpConsole:Clean;ConsoleClient:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="DSnapHttpConsole:Make;ConsoleClient:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

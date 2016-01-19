@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{FDB0EEBE-B114-4183-8426-B9E511063B0B}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="DsnapMethodsServer.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="DsnapMethodsClient.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="DsnapMethodsServer">
+			<MSBuild Projects="DsnapMethodsServer.dproj"/>
+		</Target>
+		<Target Name="DsnapMethodsServer:Clean">
+			<MSBuild Targets="Clean" Projects="DsnapMethodsServer.dproj"/>
+		</Target>
+		<Target Name="DsnapMethodsServer:Make">
+			<MSBuild Targets="Make" Projects="DsnapMethodsServer.dproj"/>
+		</Target>
+		<Target Name="DsnapMethodsClient">
+			<MSBuild Projects="DsnapMethodsClient.dproj"/>
+		</Target>
+		<Target Name="DsnapMethodsClient:Clean">
+			<MSBuild Targets="Clean" Projects="DsnapMethodsClient.dproj"/>
+		</Target>
+		<Target Name="DsnapMethodsClient:Make">
+			<MSBuild Targets="Make" Projects="DsnapMethodsClient.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="DsnapMethodsServer;DsnapMethodsClient"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="DsnapMethodsServer:Clean;DsnapMethodsClient:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="DsnapMethodsServer:Make;DsnapMethodsClient:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

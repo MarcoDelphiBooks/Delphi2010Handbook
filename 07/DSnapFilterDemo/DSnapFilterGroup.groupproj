@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{F4DAEDBB-EAB8-4BA8-A400-30457D103610}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="DSnapFilter_Server.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="DSnapFilter_Client.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="DSnapFilter_Server">
+			<MSBuild Projects="DSnapFilter_Server.dproj"/>
+		</Target>
+		<Target Name="DSnapFilter_Server:Clean">
+			<MSBuild Targets="Clean" Projects="DSnapFilter_Server.dproj"/>
+		</Target>
+		<Target Name="DSnapFilter_Server:Make">
+			<MSBuild Targets="Make" Projects="DSnapFilter_Server.dproj"/>
+		</Target>
+		<Target Name="DSnapFilter_Client">
+			<MSBuild Projects="DSnapFilter_Client.dproj"/>
+		</Target>
+		<Target Name="DSnapFilter_Client:Clean">
+			<MSBuild Targets="Clean" Projects="DSnapFilter_Client.dproj"/>
+		</Target>
+		<Target Name="DSnapFilter_Client:Make">
+			<MSBuild Targets="Make" Projects="DSnapFilter_Client.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="DSnapFilter_Server;DSnapFilter_Client"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="DSnapFilter_Server:Clean;DSnapFilter_Client:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="DSnapFilter_Server:Make;DSnapFilter_Client:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>

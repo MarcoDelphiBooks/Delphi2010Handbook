@@ -1,0 +1,48 @@
+﻿	<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+		<PropertyGroup>
+			<ProjectGuid>{B2BD2970-F84A-4589-829A-959BB8D2767D}</ProjectGuid>
+		</PropertyGroup>
+		<ItemGroup>
+			<Projects Include="FirstSimpleRestServer.dproj">
+				<Dependencies/>
+			</Projects>
+			<Projects Include="FirstRestClient.dproj">
+				<Dependencies/>
+			</Projects>
+		</ItemGroup>
+		<ProjectExtensions>
+			<Borland.Personality>Default.Personality.12</Borland.Personality>
+			<Borland.ProjectType/>
+			<BorlandProject>
+				<Default.Personality/>
+			</BorlandProject>
+		</ProjectExtensions>
+		<Target Name="FirstSimpleRestServer">
+			<MSBuild Projects="FirstSimpleRestServer.dproj"/>
+		</Target>
+		<Target Name="FirstSimpleRestServer:Clean">
+			<MSBuild Targets="Clean" Projects="FirstSimpleRestServer.dproj"/>
+		</Target>
+		<Target Name="FirstSimpleRestServer:Make">
+			<MSBuild Targets="Make" Projects="FirstSimpleRestServer.dproj"/>
+		</Target>
+		<Target Name="FirstRestClient">
+			<MSBuild Projects="FirstRestClient.dproj"/>
+		</Target>
+		<Target Name="FirstRestClient:Clean">
+			<MSBuild Targets="Clean" Projects="FirstRestClient.dproj"/>
+		</Target>
+		<Target Name="FirstRestClient:Make">
+			<MSBuild Targets="Make" Projects="FirstRestClient.dproj"/>
+		</Target>
+		<Target Name="Build">
+			<CallTarget Targets="FirstSimpleRestServer;FirstRestClient"/>
+		</Target>
+		<Target Name="Clean">
+			<CallTarget Targets="FirstSimpleRestServer:Clean;FirstRestClient:Clean"/>
+		</Target>
+		<Target Name="Make">
+			<CallTarget Targets="FirstSimpleRestServer:Make;FirstRestClient:Make"/>
+		</Target>
+		<Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+	</Project>
